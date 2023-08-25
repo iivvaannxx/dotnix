@@ -67,6 +67,7 @@ in {
     gnome.seahorse
     gnome.dconf-editor
     gnome.gnome-tweaks
+    gnome.gnome-disk-utility
   ];
 
   programs._1password-gui.enable = true;
