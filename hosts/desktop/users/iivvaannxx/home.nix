@@ -18,6 +18,10 @@ in {
     brave
 
     neofetch
+
+  ] ++ [
+
+    upkgs.vscode
   ];
 
   programs.gpg.enable = true;
@@ -62,12 +66,6 @@ in {
       git_protocol = "ssh";
       editor = "code";
     };
-  };
-
-  programs.vscode = {
-
-    enable = true;
-    enableUpdateCheck = false;
   };
 
   programs.ssh.enable = true;

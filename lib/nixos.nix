@@ -61,7 +61,7 @@
     # Make the users for this system.
     users = mkUsers usersPath modules.homeManagerModules;
 
-  in nixosSystem {
+  in {
 
     inherit system lib;
     modules = modules.nixosModules ++ [
@@ -81,10 +81,8 @@
     ];
   };
   
-in {
-
-  # Creates a host definition ready to use in a flake as a nixosConfiguration.
-  mkHost = { system, hostPath, modules, inputs, extraArgs ? { } } @ args: let 
+  # Creates a host module definition.
+  mkHostConfig = { system, hostPath, modules, inputs, extraArgs ? { } } @ args: let 
 
     hostName = baseNameOf hostPath;
     mkPath = path: isFile: let
@@ -132,4 +130,11 @@ in {
     ]) // extraArgs);
 
   in (mkSystem { inherit system configPath usersPath modules extraSpecialArgs home-manager; });
+
+  # Creates a host definition ready to use in a flake as a nixosConfiguration.
+  mkHost = hostConfig: (nixosSystem hostConfig);
+
+in {
+
+  inherit mkHostConfig mkHost;
 }

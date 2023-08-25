@@ -72,6 +72,10 @@ in {
   programs._1password-gui.enable = true;
   programs._1password-gui.polkitPolicyOwners = [ "iivvaannxx" ];
 
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "iivvaannxx" ];
+
   nix = {
 	
     package = pkgs.nixFlakes;

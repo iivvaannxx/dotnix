@@ -43,6 +43,7 @@ in {
   inherit (nixos)
 
     mkHost
+    mkHostConfig
   ;
 
   inherit (options) 
