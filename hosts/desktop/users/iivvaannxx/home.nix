@@ -16,6 +16,8 @@ in {
 
     alacritty
     brave
+
+    neofetch
   ];
 
   programs.gpg.enable = true;
