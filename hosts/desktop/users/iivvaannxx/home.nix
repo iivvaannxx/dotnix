@@ -45,16 +45,15 @@ in {
     extraConfig = {
 
       init.defaultBranch = "main";
-      credential.helper = "${
-
-        pkgs.git.override { withLibsecret = true; }
-
-      }/bin/git-credential-libsecret";
-
+   
       commit.gpgsign = true;
-      user.signingkey = "0CA69F169D20F056";
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      user.signingkey = "~/.ssh/git-commit.pub";
     };
   };
+
+  home.file.".ssh/allowed_signers".text = "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKidr1O1e1cSzEaMTuYu6I7MPwTR9xog4bThF85GUvaH dev.ivanporto@gmail.com";
 
   programs.gh = {
 
