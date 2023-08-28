@@ -9,19 +9,10 @@ in {
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = { 
-    
-    device = "/dev/disk/by-uuid/745067bc-0dec-42bc-b85e-10c273a7bd2d";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = { 
-    
-    device = "/dev/disk/by-uuid/FC14-3DD4";
+  fileSystems."/boot" = {    
+    device = "/dev/disk/by-label/EFI";
     fsType = "vfat";
   };
-
-  swapDevices = [ ];
 
   modules.hardware.nvidia.enable = true;
   modules.hardware.nvidia.tryFixTearing = true;
@@ -29,4 +20,27 @@ in {
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-label/NixOS";
+      fsType = "btrfs";
+      options = [ "subvol=root" "compress=zstd" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-label/NixOS";
+      fsType = "btrfs";
+      options = [ "subvol=home" "compress=zstd" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-label/NixOS";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd" ];
+    };
+
+  swapDevices =
+    [ { device = "/dev/disk/by-label/swap"; }
+    ];
 }
