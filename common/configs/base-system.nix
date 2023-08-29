@@ -5,7 +5,7 @@
 
 in {
 
-  imports = [ ./networking.nix ];
+  imports = [ ./base-networking.nix ];
 
   # Don't install the docs in the system. See: https://nixos.org/manual/nixos/stable/
   documentation.nixos.enable = mkDefault false;
@@ -25,8 +25,8 @@ in {
   environment.systemPackages = with pkgs; [ nano ];
   environment.variables = {
 
-    EDITOR = "nano";
-    VISUAL = "nano";
+    EDITOR = mkDefault "nano";
+    VISUAL = mkDefault "nano";
   };
 
   # Use English as language but Spanish units and currencies.

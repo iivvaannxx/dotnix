@@ -4,7 +4,8 @@
   inherit (lib) mkOverride;
 
   # The base configuration for every system.
-  commonSystemConfig = importCommonConfig "system";
+  commonSystemConfig = importCommonConfig "base-system";
+  system = "x86_64-linux";
 
 in {
 
@@ -76,12 +77,16 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.hostPlatform = system;
+
   environment.systemPackages = with pkgs; [
 
     gnome.nautilus
     gnome.seahorse
     gnome.dconf-editor
     gnome.gnome-tweaks
+
+    cached-nix-shell
   ];
 
   programs._1password-gui.enable = true;

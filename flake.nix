@@ -4,6 +4,9 @@
   inputs = {
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    
+    # Only used to avoid dependency duplication (Multiple inputs use flake-utils).
+    flake-utils.url = "github:numtide/flake-utils";
 
     # The package sets to use.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
@@ -21,6 +24,14 @@
 
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    rust-overlay = {
+
+      url = "github:oxalica/rust-overlay";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -60,22 +71,31 @@
     perSystem = { config, self', inputs', pkgs, upkgs, system, ... } @ args: let 
 
       # Shorthand to re-import the nixpkgs of the current system (with unfree packages).
-      mkPkgs = pkgsSource: import pkgsSource { 
+      mkPkgs = pkgsSource: overlays: import pkgsSource { 
         
-        inherit system; 
+        inherit system overlays; 
         config.allowUnfree = true;
       };
+
+      shellPkgs = mkPkgs inputs.nixpkgs [ (import inputs.rust-overlay) ];
+      toolchain = shellPkgs.rust-bin.fromRustupToolchainFile ./toolchain.toml;
 
     in {
 
       # Allow unfree packages.
-      _module.args.pkgs = mkPkgs inputs.nixpkgs;
-      _module.args.upkgs = mkPkgs inputs.unstablepkgs;
+      _module.args.pkgs = mkPkgs inputs.nixpkgs [ ];
+      _module.args.upkgs = mkPkgs inputs.unstablepkgs [ ]; 
+
+      # Include commonly used shells.
+      devShells.default = pkgs.mkShell {
+
+        packages = [ toolchain ];
+      };
     };
 
     flake = {
 
-      nixosConfigurations.desktop = createHost ./hosts/desktop "x86_64-linux";
+      nixosConfigurations.avalon = createHost ./hosts/avalon "x86_64-linux";
     };
   };
 }
