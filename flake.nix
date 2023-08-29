@@ -67,7 +67,6 @@
 
     # The systems tested at the moment.
     systems = [ "x86_64-linux" ];
-
     perSystem = { config, self', inputs', pkgs, upkgs, system, ... } @ args: let 
 
       # Shorthand to re-import the nixpkgs of the current system (with unfree packages).
@@ -77,20 +76,11 @@
         config.allowUnfree = true;
       };
 
-      shellPkgs = mkPkgs inputs.nixpkgs [ (import inputs.rust-overlay) ];
-      toolchain = shellPkgs.rust-bin.fromRustupToolchainFile ./toolchain.toml;
-
     in {
 
       # Allow unfree packages.
       _module.args.pkgs = mkPkgs inputs.nixpkgs [ ];
       _module.args.upkgs = mkPkgs inputs.unstablepkgs [ ]; 
-
-      # Include commonly used shells.
-      devShells.default = pkgs.mkShell {
-
-        packages = [ toolchain ];
-      };
     };
 
     flake = {

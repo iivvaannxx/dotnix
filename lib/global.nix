@@ -5,18 +5,17 @@
 
     # The path to the common folder.
     commonBase = ../common;
+    profilesBase = ../profiles;
 
-    commonProfiles = "${paths.commonBase}/profiles";
     commonConfigs = "${paths.commonBase}/configs";
   };
 
 in {
 
   # Imports a profile file given it's name.
-  importCommonProfile = profileFile: let 
+  importProfile = profilePath: let 
 
-    profilePath = stringWithSuffix profileFile ".nix";
-    profile = import "${paths.commonProfiles}/${profilePath}";
+    profile = import "${paths.profilesBase}/${profilePath}";
 
   in profile;
 

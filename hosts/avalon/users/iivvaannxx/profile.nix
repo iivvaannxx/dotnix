@@ -1,8 +1,8 @@
 { lib, ... } @ args: let 
 
-  # Import the common 'ivan' profile.
-  inherit (lib.custom) importCommonProfile;
-  details = importCommonProfile "ivan";
+  # Import the global 'iivvaannxx' profile.
+  inherit (lib.custom) importProfile;
+  details = importProfile "iivvaannxx";
 
 in details // { 
 

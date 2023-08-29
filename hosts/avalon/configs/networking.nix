@@ -5,4 +5,5 @@
 in {
 
   networking.wireless.enable = false;
+  networking.hostName = "avalon";
 }

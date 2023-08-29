@@ -3,7 +3,7 @@
   includeLib = customLib: import customLib  { inherit lib; };
 
   # Include every function lib file.
-  common = includeLib ./common.nix;
+  global = includeLib ./global.nix;
   conditionals = includeLib ./conditionals.nix;
   filesystem = includeLib ./filesystem.nix;
   generators = includeLib ./generators.nix;
@@ -13,9 +13,9 @@
 
 in {
 
-  inherit (common) 
+  inherit (global) 
   
-    importCommonProfile 
+    importProfile 
     importCommonConfig
   ;
 
