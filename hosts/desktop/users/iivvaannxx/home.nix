@@ -24,17 +24,6 @@ in {
     upkgs.vscode
   ];
 
-  programs.gpg.enable = true;
-  services.gpg-agent = {
-
-    enable = true;
-
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-
-    pinentryFlavor = "curses";
-  };
-
   programs.git = {
 
     enable = true;

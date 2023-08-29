@@ -1,6 +1,7 @@
 { config, lib, inputs, pkgs, upkgs, ... } @ args: let
 
   inherit (lib.custom) importCommonConfig;
+  inherit (lib) mkOverride;
 
   # The base configuration for every system.
   commonSystemConfig = importCommonConfig "system";
@@ -27,18 +28,32 @@ in {
     configurationLimit = 5;
   };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
-  services.xserver.desktopManager.xterm.enable = false;
-
   # Configure keymap in X11
   services.xserver = {
 
+    enable = true;
+    
+    displayManager = {
+
+      gdm.enable = true;
+    };
+
+    desktopManager = {
+
+      gnome.enable = true;
+      xterm.enable = false;
+    };
+
     layout = "es";
     xkbVariant = "";
+
+    exportConfiguration = true;
   };
+
+  fonts.fonts = with pkgs; [
+
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   services.gnome.core-utilities.enable = false;
   environment.gnome.excludePackages = (with pkgs; [
@@ -67,7 +82,6 @@ in {
     gnome.seahorse
     gnome.dconf-editor
     gnome.gnome-tweaks
-    gnome.gnome-disk-utility
   ];
 
   programs._1password-gui.enable = true;
