@@ -90,6 +90,9 @@ in {
   programs._1password-gui.enable = true;
   programs._1password-gui.polkitPolicyOwners = [ "iivvaannxx" ];
 
+  programs.zsh.enable = true;
+  environment.shells = [ pkgs.zsh ];
+
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "iivvaannxx" ];

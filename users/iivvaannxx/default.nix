@@ -1,23 +1,31 @@
-{ home, lib, pkgs, upkgs, profile, presetsPath, configsPath, ... } @ args: {
+{ home, lib, pkgs, upkgs, profile, presetsPath, configsPath, ... } @ args: let 
 
-  # Import the different reusable configs/presets.
+  # Shorthands to include reusable configs/presets.
+  withPreset = preset: ("${presetsPath}/${preset}.nix");
+  withConfig = config: ("${configsPath}/${config}.nix");
+
+in {
+
   imports = [
 
-    "${configsPath}/base/home-manager.nix"
+    (withConfig "base/home-manager")
 
-    "${presetsPath}/backend/node.nix"
-    "${presetsPath}/packaging/pnpm.nix"
+    (withPreset "backend/node")
+    (withPreset "packaging/pnpm")
 
-    "${presetsPath}/desktop/xdg.nix"
+    (withPreset "desktop/xdg")
 
-    "${presetsPath}/programs/gh.nix"
-    "${presetsPath}/programs/git.nix"
-    "${presetsPath}/programs/ssh.nix"
+    (withPreset "programs/gh")
+    (withPreset "programs/git")
+    (withPreset "programs/ssh")
+
+    (withPreset "shells/zsh")
+    (withPreset "shells/starship")
+    (withPreset "terminals/alacritty")
   ];
 
   home.packages = with pkgs; [
 
-    alacritty
     brave
     neofetch
 
