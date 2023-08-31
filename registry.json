@@ -1,0 +1,17 @@
+{
+  "dotnix": {
+
+    "from": {
+
+      "type": "indirect",
+      "id": "dotnix"
+    },
+
+    "to": {
+
+      "type": "github",
+      "owner": "iivvaannxx",
+      "repo": "dotnix"
+    }
+  }
+}

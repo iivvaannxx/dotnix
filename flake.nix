@@ -25,14 +25,6 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    rust-overlay = {
-
-      url = "github:oxalica/rust-overlay";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
   };
 
   outputs = { flake-parts, nixpkgs, unstablepkgs, home-manager, ... } @ inputs: let 
@@ -60,6 +52,8 @@
       # Allow unfree packages.
       _module.args.pkgs = lib.custom.mkUnfreePkgs nixpkgs { inherit system; };
       _module.args.upkgs = lib.custom.mkUnfreePkgs unstablepkgs { inherit system; };
+
+      packages.example-package = pkgs.hello;
     };
 
     flake = {

@@ -59,6 +59,7 @@ in {
   mkHost = { hostPath, system, users, inputs, lib, nixpkgs, unstablepkgs, home-manager }: let
 
     inherit (lib) nixosSystem;
+    inherit (lib.custom) readJSON;
 
     # The path where all the source code is located.
     rootPath = ../.;
@@ -70,6 +71,11 @@ in {
     
     # Resources used within NixOS configurations.
     nixosModules = (import "${rootPath}/modules/nixos");
+    nixSystemRegistry = {
+      
+      nix = { registry = (readJSON "${rootPath}/registry.json"); };
+    };
+
     nixosUsers = mkSystemUsers users;
     nixosSpecialArgs = {
 
@@ -94,6 +100,8 @@ in {
     modules = nixosModules ++ [ 
       
       hostPath 
+
+      nixSystemRegistry
       nixosUsers
 
       home-manager.nixosModules.home-manager {
