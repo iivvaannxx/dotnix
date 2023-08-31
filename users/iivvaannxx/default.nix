@@ -1,7 +1,7 @@
 { home, lib, pkgs, upkgs, profile, presetsPath, configsPath, ... } @ args: let 
 
   # Shorthands to include reusable configs/presets.
-  withPreset = preset: ("${presetsPath}/${preset}.nix");
+  withPreset = preset: ("${presetsPath}/${preset}");
   withConfig = config: ("${configsPath}/${config}.nix");
 
 in {
