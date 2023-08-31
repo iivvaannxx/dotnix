@@ -33,5 +33,5 @@
         XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
       };
     };
-  }
+  };
 }
