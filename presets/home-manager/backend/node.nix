@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------
 #
-#   Configuration preset for the NodeJS JavaScript runtime.
+#   Configuration preset for the NodeJS JavaScript runtime module.
 #
 #   See: https://nodejs.org/en/
 #   Module: https://github.com/iivvaannxx/motherflake/blob/main/presets/home-manager/backend/node.nix

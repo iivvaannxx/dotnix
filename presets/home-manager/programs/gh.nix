@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------
 #
-#   Configuration preset for the GitHub CLI client.
+#   Configuration preset for the GitHub CLI client module.
 #
 #   See: https://cli.github.com
 #   Module: https://github.com/nix-community/home-manager/blob/master/modules/programs/gh.nix

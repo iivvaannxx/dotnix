@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------
 #
-#   Configuration preset for the PNPM package manager.
+#   Configuration preset for the PNPM package manager module.
 # 
 #   See: https://pnpm.io/
 #   Module: https://github.com/iivvaannxx/motherflake/blob/main/presets/home-manager/packaging/pnpm.nix

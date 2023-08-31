@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------
 #
-#   Configuration preset for the Git CLI.
+#   Configuration preset for the Git CLI module.
 #
 #   See: https://git-scm.com
 #   Module: https://github.com/nix-community/home-manager/blob/master/modules/programs/git.nix
