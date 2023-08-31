@@ -16,6 +16,14 @@ in {
 
   in value;
 
+  # If the given set contains the given attribute, that value is returned. Otherwise the fallback value is returned.
+  tryGetAttr = attr: set: fallback: let
+
+    hasAttribute = hasAttr attr set;
+    value = if hasAttribute then set.${attr} else fallback;
+
+  in value;
+
   # Makes either one value or another depending on the given predicate.
   mkIfElse = pred: truthy: falsy: mkMerge [
     

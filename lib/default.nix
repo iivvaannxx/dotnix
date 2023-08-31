@@ -3,26 +3,22 @@
   includeLib = customLib: import customLib  { inherit lib; };
 
   # Include every function lib file.
-  global = includeLib ./global.nix;
   conditionals = includeLib ./conditionals.nix;
   filesystem = includeLib ./filesystem.nix;
   generators = includeLib ./generators.nix;
+  global = includeLib ./global.nix;
+  make = includeLib ./make.nix;
   nixos = includeLib ./nixos.nix;
   options = includeLib ./options.nix;
   validation = includeLib ./validation.nix;
 
 in {
 
-  inherit (global) 
-  
-    importProfile 
-    importCommonConfig
-  ;
-
   inherit (conditionals)
 
     nullUnless
     nullUnlessHasAttr
+    tryGetAttr
 
     mkIfElse
     mkIfHasAttr
@@ -40,18 +36,33 @@ in {
     stringWithSuffix
   ;
 
+  inherit (global) 
+  
+    importProfile 
+    importConfig
+  ;
+
+  inherit (make) 
+
+    mkPath
+    mkPkgs
+    mkUnfreePkgs
+  ;
+
   inherit (nixos)
 
     mkHost
-    mkHostConfig
   ;
 
   inherit (options) 
   
-    mkBoolOption 
     mkStrOption 
     mkStrListOption
+
+    mkSubmoduleOption
     mkDynamicAttrsetOption 
+
+    mkPackageListOption
   ;
 
   inherit (validation) 

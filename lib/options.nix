@@ -5,16 +5,6 @@
 
 in {
   
-  # Shorthand for creating boolean options in custom modules.
-  mkBoolOption = default: description: (
-
-    mkOption {
-
-      inherit default description;
-      type = types.bool;
-    }
-  );
-
   # Shorthand for creating string options in custom modules.
   mkStrOption = default: description: (
 
@@ -35,6 +25,16 @@ in {
     }
   );
 
+  # Shorthand for creating submodule options in custom modules.
+  mkSubmoduleOption = default: description: submodule: (
+
+    mkOption {
+
+      inherit default description;
+      type = types.submodule { options = submodule; };
+    }
+  );
+
   # Shorthand for creating dynamic submodules in custom modules. (ex: my.module.<anything here>)
   mkDynamicAttrsetOption = default: description: mkSubmodule: (
 
@@ -42,6 +42,16 @@ in {
 
       inherit default description;
       type = types.attrsOf (types.submodule mkSubmodule);
+    }
+  );
+
+  # Shorthand for creating package lists options in custom modules.
+  mkPackageListOption = default: description: (
+
+    mkOption {
+
+      inherit default description;
+      type = types.listOf types.package;
     }
   );
 }
