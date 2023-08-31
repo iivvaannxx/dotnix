@@ -52,8 +52,6 @@
       # Allow unfree packages.
       _module.args.pkgs = lib.custom.mkUnfreePkgs nixpkgs { inherit system; };
       _module.args.upkgs = lib.custom.mkUnfreePkgs unstablepkgs { inherit system; };
-
-      packages.example-package = pkgs.hello;
     };
 
     flake = {

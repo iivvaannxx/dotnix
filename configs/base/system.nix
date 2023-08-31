@@ -44,6 +44,16 @@ in {
     LC_IDENTIFICATION = mkDefault "es_ES.UTF-8";
   };
 
+  nix.settings = {
+    
+    # Ensure flakes and the new Nix CLI are enabled.
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = mkDefault true;
+  };
+
+  nix.gc.automatic = mkDefault true;
+  nix.optimise.automatic = mkDefault true;
+
   # Only allow 'wheel' group members to use sudo.
   security.sudo.enable = mkDefault true;
   security.sudo.execWheelOnly = mkDefault true;
