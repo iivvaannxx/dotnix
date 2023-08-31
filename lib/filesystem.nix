@@ -16,4 +16,13 @@ in {
     subfolderList = mapAttrsToList (key: _: key) subfolders;
 
   in subfolderList;
+
+  # Reads and parses a JSON file at the given path.
+  readJSON = path: let
+
+    # Read the file and parse it as JSON.
+    fileContent = builtins.readFile path;
+    parsedJSON = builtins.fromJSON fileContent;
+
+  in parsedJSON;
 }

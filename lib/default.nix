@@ -28,6 +28,7 @@ in {
   inherit (filesystem)
 
     getSubfolders
+    readJSON
   ;
 
   inherit (generators)
