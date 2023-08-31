@@ -5,7 +5,7 @@
 
 in {
 
-  imports = [ ./base-networking.nix ];
+  imports = [ ./networking.nix ];
 
   # Don't install the docs in the system. See: https://nixos.org/manual/nixos/stable/
   documentation.nixos.enable = mkDefault false;
