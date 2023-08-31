@@ -1,5 +1,5 @@
 {
-  description = "Description for the project";
+  description = "My personal NixOS system configuration.";
 
   inputs = {
 
@@ -35,32 +35,18 @@
     };
   };
 
-  outputs = { flake-parts, home-manager, ... } @ inputs: let 
+  outputs = { flake-parts, nixpkgs, unstablepkgs, home-manager, ... } @ inputs: let 
   
     # Extend the default library with our own set of functions.
     lib = (inputs.nixpkgs.lib.extend (import ./overlays/lib.nix));
 
-    # Creates a host configuration.
-    createHostConfig = hostPath: system: let
+    # Shorthand function to create a host.
+    createHost = system: hostPath: users: (lib.custom.mkHost { 
+      
+      inherit hostPath system users inputs lib
+        nixpkgs unstablepkgs home-manager; 
+    });
     
-      args = { 
-
-        inherit system hostPath inputs;
-
-        modules = import ./modules;
-        extraArgs = { };
-      };
-
-    in (lib.custom.mkHostConfig args);
-
-    # Creates a host with the given host path and system.
-    createHost = hostPath: system: let
-
-      # Generate the configuration.
-      host = (createHostConfig hostPath system);
-
-    in (lib.custom.mkHost host);
-  
   in flake-parts.lib.mkFlake { inherit inputs; } {
 
     imports = [ ];
@@ -69,23 +55,16 @@
     systems = [ "x86_64-linux" ];
     perSystem = { config, self', inputs', pkgs, upkgs, system, ... } @ args: let 
 
-      # Shorthand to re-import the nixpkgs of the current system (with unfree packages).
-      mkPkgs = pkgsSource: overlays: import pkgsSource { 
-        
-        inherit system overlays; 
-        config.allowUnfree = true;
-      };
-
     in {
 
       # Allow unfree packages.
-      _module.args.pkgs = mkPkgs inputs.nixpkgs [ ];
-      _module.args.upkgs = mkPkgs inputs.unstablepkgs [ ]; 
+      _module.args.pkgs = lib.custom.mkUnfreePkgs nixpkgs { inherit system; };
+      _module.args.upkgs = lib.custom.mkUnfreePkgs unstablepkgs { inherit system; };
     };
 
     flake = {
 
-      nixosConfigurations.avalon = createHost ./hosts/avalon "x86_64-linux";
+      nixosConfigurations.avalon = createHost "x86_64-linux" ./hosts/avalon [ ./users/iivvaannxx ];
     };
   };
 }

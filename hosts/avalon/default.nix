@@ -1,10 +1,5 @@
-{ config, lib, inputs, pkgs, upkgs, ... } @ args: let
+{ config, lib, inputs, pkgs, upkgs, presetsPath, configsPath, ... } @ args: let
 
-  inherit (lib.custom) importCommonConfig;
-  inherit (lib) mkOverride;
-
-  # The base configuration for every system.
-  commonSystemConfig = importCommonConfig "base-system";
   system = "x86_64-linux";
 
 in {
@@ -13,8 +8,11 @@ in {
 
     ./hardware.nix 
     ./networking.nix
+    ./filesystem.nix
 
-    commonSystemConfig
+    "${configsPath}/base/system.nix"
+
+    "${presetsPath}/virtualisation/docker.nix"
   ];
 
   # Boot configuration.
