@@ -1,6 +1,7 @@
 { lib }: let 
 
-  inherit (builtins) isPath readFile fromJSON;
+  inherit (builtins) pathExists readFile fromJSON;
+  inherit (lib) hasSuffix;
 
 in {
 
@@ -8,7 +9,7 @@ in {
   fromJSON' = source: let
 
     # Check if it's a file, if so, read it.
-    isFilepath = isPath path;
+    isFilepath = (pathExists source) && hasSuffix ".json" source;
     jsonContent = if isFilepath then (readFile source) else (source);
 
     # Parse the json contents.
