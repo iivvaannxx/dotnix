@@ -11,6 +11,9 @@
 
   inherit (lib) mkDefault;
 
+  # Import the configuration options.
+  starshipConfig = (import ./config.nix args);
+
 in {
 
   programs.starship = {
@@ -24,9 +27,6 @@ in {
     enableNushellIntegration = mkDefault config.programs.nushell.enable;
     enableIonIntegration = mkDefault config.programs.ion.enable;
 
-    settings = {
-
-
-    };
+    settings = mkDefault starshipConfig;
   };
 }

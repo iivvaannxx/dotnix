@@ -19,8 +19,8 @@ in {
     (withPreset "programs/git")
     (withPreset "programs/ssh")
 
-    (withPreset "shells/zsh")
-    (withPreset "shells/starship")
+    (withPreset "shell/zsh")
+    (withPreset "shell/starship")
     (withPreset "terminals/alacritty")
   ];
 

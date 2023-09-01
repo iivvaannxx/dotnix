@@ -12,13 +12,13 @@
   inherit (lib) mkDefault;
 
   # Import the configuration options.
-  config = (import ./config.nix args);
+  alacrittyConfig = (import ./config.nix args);
 
 in {
 
   programs.alacritty = {
 
     enable = true;
-    settings = mkDefault config;
+    settings = mkDefault alacrittyConfig;
   };
 }

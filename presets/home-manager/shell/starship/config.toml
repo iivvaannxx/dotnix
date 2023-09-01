@@ -1,8 +1,8 @@
 format = """\
 [┌───](bold white)\
-[ \ue0b6](#596bd2)\
+[ ](#596bd2)\
 (bg:#596bd2 fg:#ffffff)$env_var$time\
-[\ue0b4 ](#596bd2)$all\
+[ ](#596bd2)$all\
 [│](bold white)\n\
 [└─](bold white)$character"""
 
