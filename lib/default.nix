@@ -3,16 +3,25 @@
   includeLib = customLib: import customLib  { inherit lib; };
 
   # Include every function lib file.
+  attrsets = includeLib ./attrsets.nix;
   conditionals = includeLib ./conditionals.nix;
   filesystem = includeLib ./filesystem.nix;
-  generators = includeLib ./generators.nix;
-  global = includeLib ./global.nix;
   make = includeLib ./make.nix;
   nixos = includeLib ./nixos.nix;
   options = includeLib ./options.nix;
+  parsers = includeLib ./parsers.nix;
+  strings = includeLib ./strings.nix;
   validation = includeLib ./validation.nix;
 
 in {
+
+  inherit (attrsets)
+
+    mapAndFilterAttrs
+
+    attrKeys
+    attrKeysRecursive
+  ;
 
   inherit (conditionals)
 
@@ -27,20 +36,11 @@ in {
 
   inherit (filesystem)
 
-    getSubfolders
-    readJSON
-  ;
+    readDirRecursive
+    readDirRecursive'
 
-  inherit (generators)
-
-    commaSeparatedList
-    stringWithSuffix
-  ;
-
-  inherit (global) 
-  
-    importProfile 
-    importConfig
+    getModulesRecursive
+    mapModulesRecursive
   ;
 
   inherit (make) 
@@ -64,6 +64,19 @@ in {
     mkDynamicAttrsetOption 
 
     mkPackageListOption
+  ;
+
+  inherit (parsers)
+
+    fromJSON'
+  ;
+
+  inherit (strings)
+
+    commaSeparatedList
+    stringWithSuffix
+
+    removeAllChars
   ;
 
   inherit (validation) 

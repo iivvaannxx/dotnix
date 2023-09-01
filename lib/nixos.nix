@@ -59,7 +59,7 @@ in {
   mkHost = { hostPath, system, users, inputs, lib, nixpkgs, unstablepkgs, home-manager }: let
 
     inherit (lib) nixosSystem;
-    inherit (lib.custom) readJSON;
+    inherit (lib.custom) fromJSON';
 
     # The path where all the source code is located.
     rootPath = ../.;
@@ -73,7 +73,7 @@ in {
     nixosModules = (import "${rootPath}/modules/nixos");
     nixSystemRegistry = {
       
-      nix = { registry = (readJSON "${rootPath}/registry.json"); };
+      nix = { registry = (fromJSON' "${rootPath}/registry.json"); };
     };
 
     nixosUsers = mkSystemUsers users;

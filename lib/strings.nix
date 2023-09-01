@@ -1,5 +1,6 @@
 { lib }: let 
 
+  inherit (builtins) replaceStrings;
   inherit (lib) hasSuffix concatStringsSep;
 
 in {
@@ -13,4 +14,7 @@ in {
     containsSuffix = hasSuffix suffix str;
 
   in if containsSuffix then str else "${str}${suffix}";
+
+  # Removes all occurrences of the given characters from the given string.
+  removeAllChars = chars: str: replaceStrings chars [ "" ] str;
 }
