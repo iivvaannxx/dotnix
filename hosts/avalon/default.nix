@@ -108,7 +108,7 @@ in {
     settings = {
 
       PermitRootLogin = "no";
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
     };
   };
 
