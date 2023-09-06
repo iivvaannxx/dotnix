@@ -35,6 +35,16 @@ in {
     }
   );
 
+  # Shorthand for creating submodule lists options in custom modules.
+  mkSubmoduleListOption = default: description: submodule: (
+
+    mkOption {
+
+      inherit default description;
+      type = types.listOf (types.submodule { options = submodule; });
+    }
+  );
+
   # Shorthand for creating dynamic submodules in custom modules. (ex: my.module.<anything here>)
   mkDynamicAttrsetOption = default: description: mkSubmodule: (
 

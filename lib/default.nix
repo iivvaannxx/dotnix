@@ -18,8 +18,6 @@ in {
   inherit (attrsets)
 
     mapAndFilterAttrs
-
-    attrKeys
     attrKeysRecursive
   ;
 
@@ -61,6 +59,7 @@ in {
     mkStrListOption
 
     mkSubmoduleOption
+    mkSubmoduleListOption
     mkDynamicAttrsetOption 
 
     mkPackageListOption

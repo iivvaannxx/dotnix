@@ -8,9 +8,6 @@ in {
   # Maps the given function to the given attribute set. Then filters the result based on the given predicate.
   mapAndFilterAttrs = pred: fn: attrs: filterAttrs pred (mapAttrs' fn attrs);
 
-  # Returns all the keys of the given attribute set.
-  attrKeys = attrs: mapAttrsToList (key: _: key) attrs;
-
   # Returns all the keys of the given attribute set, recursively.
   attrKeysRecursive = attrs: let
 
