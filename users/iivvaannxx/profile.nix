@@ -13,5 +13,9 @@
   systemUserOverride = {
 
     extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = [
+
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG0BkiQja9oJjeAZQiHEAY2tOUcB8BpOxYWRYov2y3Mw iivvaannxx@avalon"
+    ];
   };
 }

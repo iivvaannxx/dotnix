@@ -9,3 +9,11 @@ repl () {
     customLib = (import ./lib { inherit lib; });\
   }"
 }
+
+rebuild () {
+
+  mode=${1:-switch}
+  host=${2:-avalon}
+
+  sudo nixos-rebuild $mode --flake .#$host
+}

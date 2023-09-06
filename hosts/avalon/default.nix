@@ -97,6 +97,21 @@ in {
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "iivvaannxx" ];
 
+  services.openssh = {
+
+    enable = true;
+
+    # This opens port 22 automatically.
+    openFirewall = true;
+    startWhenNeeded = true;
+
+    settings = {
+
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+  };
+
   nix = {
 	
     package = pkgs.nixFlakes;
