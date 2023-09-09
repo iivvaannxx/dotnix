@@ -34,3 +34,6 @@ jobs:
         # Not sure if this is needed, but my mind rests in peace knowing it's there.
         # Filters the encrypted secrets derivation from going into the public cache.
         pushFilter: "(dotnix-secrets)"
+      
+    - run: nix-build
+    - run: nix-shell --run "echo OK"
