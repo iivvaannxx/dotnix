@@ -10,6 +10,10 @@ on:
 
 jobs:
 
+  check:
+
+    runs-on: ubuntu-latest
+
   cache:
 
     runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
     # Checkout the repository contents.
     - uses: actions/checkout@v3
 
-      # To allow subsequent steps to access the private SSH keys needed during the build process.
+      # To allow subsequent actions to access the private SSH keys needed during the build process.
     - uses: webfactory/ssh-agent@v0.8.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -42,6 +46,6 @@ jobs:
 
         extraPullNames: nix-community
 
-      # Build and cache my main NixOS configuration.
+      # Build and cache my main NixOS configuration (See 'Internals' section of: https://nixos.wiki/wiki/Nixos-rebuild).
     - run: nix build .#nixosConfigurations.atlas.config.system.build.toplevel
     - run: nix-shell --run "echo OK"
