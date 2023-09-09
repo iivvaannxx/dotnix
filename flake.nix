@@ -36,7 +36,7 @@
 
     flake = {
 
-      nixosConfigurations.avalon = createHost "x86_64-linux" ./hosts/atlas [ ./users/iivvaannxx ];
+      nixosConfigurations.atlas = createHost "x86_64-linux" ./hosts/atlas [ ./users/iivvaannxx ];
     };
   };
 
