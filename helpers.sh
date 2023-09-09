@@ -13,7 +13,7 @@ repl () {
 rebuild () {
 
   mode=${1:-switch}
-  host=${2:-avalon}
+  host=${2:-atlas}
 
   sudo nixos-rebuild $mode --flake .#$host
 }

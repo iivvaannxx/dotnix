@@ -56,7 +56,7 @@
 in {
 
   # Creates a host from the given arguments.
-  mkHost = { hostPath, system, users, inputs, lib, nixpkgs, unstablepkgs, home-manager }: let
+  mkHost = { hostPath, system, users, inputs, lib, nixpkgs, unstablepkgs, home-manager, extraNixosModules ? [ ] }: let
 
     inherit (lib) nixosSystem;
     inherit (lib.custom) fromJSON';
@@ -97,10 +97,9 @@ in {
     inherit system lib;
 
     specialArgs = nixosSpecialArgs;
-    modules = nixosModules ++ [ 
+    modules = nixosModules ++ extraNixosModules ++ [ 
       
       hostPath 
-
       nixSystemRegistry
       nixosUsers
 

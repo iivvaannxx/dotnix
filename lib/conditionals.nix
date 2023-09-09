@@ -41,6 +41,4 @@ in {
   
   # Makes the given value unless the given predicate is true.
   mkUnless = pred: val: (mkIf (! pred) val);
-
-  
 }

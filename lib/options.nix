@@ -35,6 +35,16 @@ in {
     }
   );
 
+  # Shorthand for creating submodule options in custom modules.
+  mkSubmoduleWithConfigOption = default: description: submodule: config: (
+
+    mkOption {
+
+      inherit default description;
+      type = types.submodule { inherit config; options = submodule; };
+    }
+  );
+
   # Shorthand for creating submodule lists options in custom modules.
   mkSubmoduleListOption = default: description: submodule: (
 

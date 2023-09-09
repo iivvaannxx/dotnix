@@ -87,9 +87,16 @@ in {
     cached-nix-shell
   ];
 
-  programs._1password-gui.enable = true;
-  programs._1password-gui.package = upkgs._1password-gui;
-  programs._1password-gui.polkitPolicyOwners = [ "iivvaannxx" ];
+  modules.tools.onepassword = {
+
+    cli.enable = true;
+    gui = {
+
+      enable = true;
+      package = upkgs._1password-gui;
+      polkitPolicyOwners = [ "iivvaannxx" ];
+    };
+  };
 
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];

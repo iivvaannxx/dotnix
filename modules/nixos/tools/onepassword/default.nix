@@ -1,7 +1,7 @@
 # -------------------------------------------------------------------------------------------------
 #
-#     Home Manager module for the Performant Node Package Manager (pnpm).
-#     See: https://pnpm.io/
+#     Home Manager module for the 1Password password manager.
+#     See: https://1password.com/
 #
 # -------------------------------------------------------------------------------------------------
 
@@ -10,10 +10,10 @@
   inherit (builtins) map fromToml concatStringsSep;
 
   inherit (lib) mkEnableOption mkPackageOption mkIf;
-  inherit (lib.custom) mkSubmoduleOption mkSubmoduleListOption mkStrOption;
+  inherit (lib.custom) mkSubmoduleOption mkSubmoduleListOption mkStrOption mkStrListOption;
 
   # The current configuration values.
-  cfg = options.modules.tools.onepassword;
+  cfg = config.modules.tools.onepassword;
 
 in {
 
@@ -22,7 +22,7 @@ in {
     gui = mkSubmoduleOption { } "Options for the 1Password GUI." {
 
       enable = mkEnableOption "the 1Password password manager GUI.";
-      package = mkPackageOption "1Password GUI" { default = [ "_1password-gui" ] };
+      package = mkPackageOption pkgs "1Password GUI" { default = [ "_1password-gui" ]; };
 
       polkitPolicyOwners = mkStrListOption [ ] "The users that should be able to integrate 1Password with polkit-based authentication mechanisms.";
     };
@@ -30,7 +30,7 @@ in {
     cli = mkSubmoduleOption { } "Options for the 1Password CLI." {
 
       enable = mkEnableOption "the 1Password password manager CLI.";
-      package = mkPackageOption "1Password CLI" { default = [ "_1password" ] };
+      package = mkPackageOption pkgs "1Password CLI" { default = [ "_1password" ]; };
     };
 
     # See: https://developer.1password.com/docs/ssh/agent/config
@@ -44,6 +44,7 @@ in {
 
   config = let 
 
+    # TODO: Assert that at least one of the key-value pairs is defined.
     agentSections = (map (config: concatStringsSep "\n" [
 
       "[[ssh-keys]]"

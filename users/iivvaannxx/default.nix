@@ -33,4 +33,13 @@ in {
 
     upkgs.vscode
   ];
+
+  programs.neovim.enable = true;
+
+  # TODO: Abstract into a module.
+  xdg.configFile."1Password/ssh/agent.toml".text = ''
+  
+    [[ssh-keys]]
+    vault = "Developer"
+  '';
 }

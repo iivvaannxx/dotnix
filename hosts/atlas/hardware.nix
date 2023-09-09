@@ -20,4 +20,6 @@ in {
   # Auto-generated settings. Better to not touch them.
   powerManagement.cpuFreqGovernor = mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.logitech.wireless.enable = true;
 }

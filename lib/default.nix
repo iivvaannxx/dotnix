@@ -60,8 +60,9 @@ in {
 
     mkSubmoduleOption
     mkSubmoduleListOption
-    mkDynamicAttrsetOption 
+    mkSubmoduleWithConfigOption
 
+    mkDynamicAttrsetOption 
     mkPackageListOption
   ;
 
