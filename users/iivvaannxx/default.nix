@@ -22,6 +22,8 @@ in {
     (withPreset "shell/zsh")
     (withPreset "shell/starship")
     (withPreset "terminals/alacritty")
+
+    ./secrets.nix
   ];
 
   home.packages = with pkgs; [
@@ -32,7 +34,13 @@ in {
   ] ++ [
 
     upkgs.vscode
+    upkgs.discord
   ];
+
+  home.sessionVariables = {
+    
+    SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
+  };
 
   programs.neovim.enable = true;
 

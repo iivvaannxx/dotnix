@@ -25,6 +25,10 @@ in {
 
     # See: https://github.com/zsh-users/zsh-syntax-highlighting
     autocd = mkDefault true;
+    shellAliases = {
+
+      cachix = "op plugin run -- cachix";
+    };
 
     history = {
 

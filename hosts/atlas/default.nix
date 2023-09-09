@@ -120,6 +120,8 @@ in {
     };
   };
 
+  modules.tools.cachix.enable = true;
+
   nix = {
 	
     package = pkgs.nixFlakes;

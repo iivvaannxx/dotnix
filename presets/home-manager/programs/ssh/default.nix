@@ -19,6 +19,11 @@ in {
     enable = true;
     extraConfig = mkDefault ''
 
+      # For GitHub specify the SSH key to use.
+      Host github.com
+        IdentityFile ~/.ssh/github-iivvaannxx.pub
+        IdentitiesOnly yes
+
       # Used by the 1Password SSH agent.
       Host *
         IdentityAgent ~/.1password/agent.sock

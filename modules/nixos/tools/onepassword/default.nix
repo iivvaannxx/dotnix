@@ -3,6 +3,9 @@
 #     Home Manager module for the 1Password password manager.
 #     See: https://1password.com/
 #
+#     CLI Module: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/_1password.nix
+#     GUI Module: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/_1password-gui.nix
+#
 # -------------------------------------------------------------------------------------------------
 
 { config, lib, pkgs, upkgs, ... } @ args: let 

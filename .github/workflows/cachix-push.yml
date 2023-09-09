@@ -1,0 +1,36 @@
+name: Build and push to Cachix
+
+on:
+
+  push:
+    branches:
+      - main
+
+  workflow_dispatch: { }
+
+jobs:
+
+  cache:
+
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout the repository contents.
+    - uses: actions/checkout@v3
+    
+    # Install the Nix Package manager.
+    - uses: cachix/install-nix-action@v20
+      with:
+
+        nix_path: nixpkgs=channel:nixos-unstable
+    
+      # Push to Cachix.
+    - uses: cachix/cachix-action@v12
+      with:
+
+        name: dotnix
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+        # Not sure if this is needed, but my mind rests in peace knowing it's there.
+        # Filters the encrypted secrets derivation from going into the public cache.
+        pushFilter: "(dotnix-secrets)"
