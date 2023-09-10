@@ -7,7 +7,7 @@
 
 { config, lib, pkgs, upkgs, ... } @ args: let 
 
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkBefore;
 
   # The current configuration values.
   cfg = config.modules.tools.cachix;
@@ -25,16 +25,16 @@ in {
     nix.settings = {
 
       trusted-users = [ "iivvaannxx" ];
-      extra-substituters = [ 
+      substituters = mkBefore [ 
         
-        "https://nix-community.cachix.org"
         "https://dotnix.cachix.org"
+        "https://nix-community.cachix.org"
       ];
 
-      extra-trusted-public-keys = [ 
+      trusted-public-keys = mkBefore [ 
         
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" 
         "dotnix.cachix.org-1:RPod1Hou5kRivWRdxQ4dHnPU5r/5M28oTOrF+VKqWqY="      
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" 
       ];
     };
   };
