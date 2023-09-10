@@ -2,10 +2,6 @@ name: Build and push to Cachix
 
 on:
 
-  push:
-    branches:
-      - main
-
   workflow_dispatch: { }
 
 jobs:
