@@ -10,10 +10,6 @@ on:
 
 jobs:
 
-  check:
-
-    runs-on: ubuntu-latest
-
   cache:
 
     runs-on: ubuntu-latest
