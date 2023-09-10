@@ -44,7 +44,6 @@ jobs:
         # Ensure this is empty for the pushFilter to work as expected.
         # See: https://github.com/cachix/cachix-action/blob/6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee/action.yml#L18
         pathsToPush: ""
-        cachixArgs: -v
 
       # Build and cache my main NixOS configuration (See 'Internals' section of: https://nixos.wiki/wiki/Nixos-rebuild).
-    - run: nix build .#nixosConfigurations.atlas.config.system.build.toplevel
+    - run: nix build .#nixosConfigurations.atlas.config.system.build.toplevel -L
