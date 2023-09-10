@@ -12,6 +12,11 @@ jobs:
 
   cache:
 
+    env:
+
+      # The host to build.
+      host: "atlas"
+
     runs-on: ubuntu-latest
     steps:
 
@@ -39,11 +44,7 @@ jobs:
 
         # Not sure if this is needed, but my mind rests in peace knowing it's there.
         # Filters the encrypted secrets derivation from going into the public cache.
-        pushFilter: "(dotnix-secrets$)"
-
-        # Ensure this is empty for the pushFilter to work as expected.
-        # See: https://github.com/cachix/cachix-action/blob/6a2e08b5ebf7a9f285ff57b1870a4262b06e0bee/action.yml#L18
-        pathsToPush: ""
+        pushFilter: "nixos-system-$host"
 
       # Build and cache my main NixOS configuration (See 'Internals' section of: https://nixos.wiki/wiki/Nixos-rebuild).
-    - run: nix build .#nixosConfigurations.atlas.config.system.build.toplevel -L
+    - run: "nix build .#nixosConfigurations.$host.config.system.build.toplevel -L"
