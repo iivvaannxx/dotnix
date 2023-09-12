@@ -52,6 +52,13 @@ in {
     truncation_symbol = "…/";
   };
 
+  custom.direnv = {
+
+    format = "[\\[direnv\\]]($style) ";
+    style = "fg:yellow dimmed";
+    when = "env | grep -E '^DIRENV_FILE='";
+  };
+
   package = disabledConfig;
   container = disabledConfig;
 }

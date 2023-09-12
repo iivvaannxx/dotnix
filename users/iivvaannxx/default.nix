@@ -1,8 +1,13 @@
-{ home, lib, pkgs, upkgs, profile, presetsPath, configsPath, ... } @ args: let 
+{ home, lib, customPkgs, pkgs, upkgs, profile, presetsPath, configsPath, ... } @ args: let 
+
+  inherit (lib) attrValues;
 
   # Shorthands to include reusable configs/presets.
   withPreset = preset: ("${presetsPath}/${preset}");
   withConfig = config: ("${configsPath}/${config}.nix");
+
+  # The packages defined at the flake outputs.
+  selfPackages = attrValues customPkgs;
 
 in {
 
@@ -30,12 +35,14 @@ in {
 
     brave
     neofetch
+    termius
 
   ] ++ [
 
     upkgs.vscode
     upkgs.discord
-  ];
+
+  ] ++ selfPackages;
 
   home.sessionVariables = {
     
@@ -50,4 +57,23 @@ in {
     [[ssh-keys]]
     vault = "Developer"
   '';
+
+  programs.direnv = {
+
+    enable = true;
+    
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+
+    config = {
+
+      global.disable_stdin = true;
+    };
+  };
+
+  home.sessionVariables = {
+
+    # Temporal.
+    DIRENV_LOG_FORMAT = "";
+  };
 }

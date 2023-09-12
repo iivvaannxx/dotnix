@@ -33,7 +33,7 @@ in {
 
       trusted-public-keys = mkBefore [ 
         
-        "dotnix.cachix.org-1:RPod1Hou5kRivWRdxQ4dHnPU5r/5M28oTOrF+VKqWqY="      
+        "dotnix.cachix.org-1:dr7EENt5EaserzgFqIVVEoVYslky0Omgu3Zm9Ft548g="      
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" 
       ];
     };

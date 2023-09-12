@@ -1,4 +1,15 @@
-{ config, lib, ... } @ args: {
+{ config, lib, ... } @ args: let 
+
+  # Import the theme definitions.
+  themes = import ./themes.nix args;
+  currentTheme = themes.catppuccin.mocha;
+
+in {
+
+  import = [
+
+    currentTheme
+  ];
   
   shell = {
 

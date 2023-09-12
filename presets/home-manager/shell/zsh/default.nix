@@ -7,10 +7,20 @@
 #
 # -------------------------------------------------------------------------------------------------
 
-{ config, osConfig, lib, pkgs, upkgs, profile, ... } @ args: let
+{ config, lib, pkgs, upkgs, profile, ... } @ args: let
 
   inherit (builtins) baseNameOf;
-  inherit (lib) mkDefault;
+  inherit (lib) mkDefault concatStringsSep mapAttrsToList;
+
+  # The plugins to source into ZSH.
+  zshPlugins = import ./plugins.nix args;
+
+  sourceAbbreviations = let 
+
+    aliases = import ./abbreviations.nix;
+    transform = name: value: "abbr --session ${name}=\"${value}\" &>/dev/null";
+
+  in concatStringsSep "\n" (mapAttrsToList transform aliases);
 
 in {
 
@@ -19,16 +29,17 @@ in {
     enable = true;
     enableCompletion = mkDefault true;
     enableAutosuggestions = mkDefault true;
+    enableSyntaxHighlighting = mkDefault true;
 
     # The path where the ZSH configuration files are stored. ($HOME is prepended by default).
     dotDir = mkDefault "${baseNameOf config.xdg.configHome}/zsh";
 
     # See: https://github.com/zsh-users/zsh-syntax-highlighting
     autocd = mkDefault true;
-    shellAliases = {
+    plugins = zshPlugins;
 
-      cachix = "op plugin run -- cachix";
-    };
+    shellAliases = import ./aliases.nix;
+    initExtra = sourceAbbreviations;
 
     history = {
 
