@@ -1,18 +1,20 @@
 { lib, pkgs, ... } @ args: let 
   
-  inherit (builtins) baseNameOf;
+  inherit (builtins) baseNameOf listToAttrs;
+
+  inherit (lib) removeSuffix;
   inherit (lib.custom) mapModulesRecursive;
 
   # Contains all the paths to each package.
   currentPath = ./.;
   importPackage = path: let 
   
-    packageName = baseNameOf path;
-    package = pkgs.callPackage "${currentPath}/${path}" { };
+    packageName = removeSuffix ".nix" (baseNameOf path);
+    package = import "${currentPath}/${path}" args;
 
-  in { "${packageName}" = package; };
+  in { name = packageName; value = package; };
 
   # All the custom defined packages.
   allPackages = mapModulesRecursive currentPath importPackage;
 
-in allPackages
+in listToAttrs allPackages

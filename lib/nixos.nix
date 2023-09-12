@@ -56,7 +56,7 @@
 in {
 
   # Creates a host from the given arguments.
-  mkHost = { hostPath, system, users, inputs, lib, nixpkgs, unstablepkgs, home-manager, extraNixosModules ? [ ] }: let
+  mkHost = { hostPath, system, self, users, inputs, lib, nixpkgs, unstablepkgs, home-manager, extraNixosModules ? [ ] }: let
 
     inherit (lib) nixosSystem;
     inherit (lib.custom) fromJSON';
@@ -80,6 +80,8 @@ in {
     nixosSpecialArgs = {
 
       inherit inputs configsPath pkgs upkgs;
+
+      customPkgs = self.packages.${system};
       presetsPath = "${rootPath}/presets/nixos";
     };
 
@@ -89,6 +91,8 @@ in {
     homeManagerSpecialArgs = {
 
       inherit inputs configsPath pkgs upkgs;
+
+      customPkgs = self.packages.${system};
       presetsPath = "${rootPath}/presets/home-manager";
     };
     

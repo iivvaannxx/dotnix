@@ -1,6 +1,6 @@
 {
   description = "My personal NixOS system configuration.";
-  outputs = { flake-parts, nixpkgs, unstablepkgs, home-manager, ... } @ inputs: let 
+  outputs = { self, flake-parts, nixpkgs, unstablepkgs, home-manager, ... } @ inputs: let 
   
     # Extend the default library with our own set of functions.
     lib = (inputs.nixpkgs.lib.extend (import ./overlays/lib.nix));
@@ -9,7 +9,7 @@
     createHost = system: hostPath: users: (lib.custom.mkHost { 
       
       inherit hostPath system users inputs lib
-        nixpkgs unstablepkgs home-manager;
+        nixpkgs unstablepkgs home-manager self;
 
       # Add here the modules received in the flake inputs (except HM, which is handled automatically).
       extraNixosModules = [ 
@@ -31,7 +31,7 @@
       _module.args.upkgs = lib.custom.mkUnfreePkgs unstablepkgs { inherit system; };
 
       # Import all the custom packages.
-      # packages = import ./packages args;
+      packages = import ./packages (args // { inherit lib; });
     };
 
     flake = {
