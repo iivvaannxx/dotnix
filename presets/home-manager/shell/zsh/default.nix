@@ -12,15 +12,11 @@
   inherit (builtins) baseNameOf;
   inherit (lib) mkDefault concatStringsSep mapAttrsToList;
 
-  # The plugins to source into ZSH.
-  zshPlugins = import ./plugins.nix args;
+  # Some manually fetched sources (themes, scripts...).
+  sources = import ./sources.nix args;
 
-  sourceAbbreviations = let 
-
-    aliases = import ./abbreviations.nix;
-    transform = name: value: "abbr --session ${name}=\"${value}\" &>/dev/null";
-
-  in concatStringsSep "\n" (mapAttrsToList transform aliases);
+  sourcePlugins = import ./plugins.nix args;
+  sourceAbbreviations = import ./abbreviations.nix args;
 
 in {
 
@@ -36,10 +32,17 @@ in {
 
     # See: https://github.com/zsh-users/zsh-syntax-highlighting
     autocd = mkDefault true;
-    plugins = zshPlugins;
-
     shellAliases = import ./aliases.nix;
-    initExtra = sourceAbbreviations;
+
+    plugins = sourcePlugins;
+    initExtra = sourceAbbreviations + ''
+    
+      # Source the ZSH theme.
+      source "${sources.catppuccinSyntaxHighlighting}/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+
+      bindkey '^[[1;5D' backward-word
+      bindkey '^[[1;5C' forward-word
+    '';
 
     history = {
 
