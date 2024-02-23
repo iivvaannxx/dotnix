@@ -1,4 +1,4 @@
-{ config, lib, ... } @ args: let 
+{ config, lib, pkgs,... } @ args: let 
 
   # Import the theme definitions.
   themes = import ./themes.nix args;
@@ -13,7 +13,7 @@ in {
   
   shell = {
 
-    program = "${config.programs.zsh.package}/bin/zsh";
+    program = "${pkgs.bashInteractive}/bin/bash";
     args = [ "-l" ];
   };
 

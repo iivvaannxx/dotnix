@@ -24,6 +24,7 @@ in {
 
   # At least an editor to edit the configuration.
   environment.systemPackages = with pkgs; [ nano ];
+  environment.pathsToLink = [ "/share/bash-completion" ];
   environment.variables = {
 
     EDITOR = mkDefault "nano";
@@ -31,7 +32,7 @@ in {
   };
 
   # Use English as language but Spanish units and currencies.
-  i18n.defaultLocale = mkDefault esLocale;
+  i18n.defaultLocale = mkDefault "en_US.UTF-8";
   i18n.extraLocaleSettings = {
 
     LC_NAME = mkDefault esLocale;

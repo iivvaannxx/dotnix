@@ -14,9 +14,11 @@
 
   # Some manually fetched sources (themes, scripts...).
   sources = import ./sources.nix args;
-
   sourcePlugins = import ./plugins.nix args;
-  sourceAbbreviations = import ./abbreviations.nix args;
+  sourceAbbreviations = import ../abbreviations.nix;
+
+  transformAbbr = name: value: "abbr --session ${name}=\"${value}\" &>/dev/null";
+  abbreviations = concatStringsSep "\n" (mapAttrsToList transformAbbr sourceAbbreviations);
 
 in {
 
@@ -35,10 +37,10 @@ in {
 
     # See: https://github.com/zsh-users/zsh-syntax-highlighting
     autocd = mkDefault true;
-    shellAliases = import ./aliases.nix;
+    shellAliases = import ../aliases.nix;
 
     plugins = sourcePlugins;
-    initExtra = sourceAbbreviations + ''
+    initExtra = abbreviations + ''
     
       # Source the ZSH theme.
       source "${sources.catppuccinSyntaxHighlighting}/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"

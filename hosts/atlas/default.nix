@@ -11,7 +11,6 @@ in {
     ./filesystem.nix
 
     "${configsPath}/base/system.nix"
-
     "${presetsPath}/virtualisation/docker.nix"
   ];
 
@@ -98,8 +97,8 @@ in {
     };
   };
 
-  programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh ];
+  programs.zsh.enable = false;
+  environment.shells = [ pkgs.bash ];
 
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;

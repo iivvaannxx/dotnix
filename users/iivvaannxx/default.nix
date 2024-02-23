@@ -25,8 +25,8 @@ in {
     (withPreset "programs/ssh")
     # (withPreset "programs/vscode")
 
-    (withPreset "shell/zsh")
     (withPreset "shell/starship")
+    (withPreset "shell/bash")
     (withPreset "terminals/alacritty")
 
     ./secrets.nix
@@ -37,6 +37,7 @@ in {
     brave
     neofetch
     obs-studio
+    blesh
     vlc
     firefox
     blender
@@ -71,7 +72,7 @@ in {
 
     enable = true;
     
-    enableZshIntegration = true;
+    enableBashIntegration = true;
     nix-direnv.enable = true;
 
     config = {
