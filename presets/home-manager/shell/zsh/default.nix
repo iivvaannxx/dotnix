@@ -25,7 +25,10 @@ in {
     enable = true;
     enableCompletion = mkDefault true;
     enableAutosuggestions = mkDefault true;
-    enableSyntaxHighlighting = mkDefault true;
+    syntaxHighlighting = {
+
+      enable = mkDefault true;
+    };
 
     # The path where the ZSH configuration files are stored. ($HOME is prepended by default).
     dotDir = mkDefault "${baseNameOf config.xdg.configHome}/zsh";

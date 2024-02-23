@@ -23,6 +23,7 @@ in {
     (withPreset "programs/gh")
     (withPreset "programs/git")
     (withPreset "programs/ssh")
+    # (withPreset "programs/vscode")
 
     (withPreset "shell/zsh")
     (withPreset "shell/starship")
@@ -35,7 +36,15 @@ in {
 
     brave
     neofetch
-    termius
+    obs-studio
+    vlc
+    firefox
+    blender
+    google-chrome
+    deno
+    inkscape
+    figma-linux
+    figma-agent
 
   ] ++ [
 

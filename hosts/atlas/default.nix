@@ -49,7 +49,7 @@ in {
     exportConfiguration = true;
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
 
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
@@ -101,8 +101,8 @@ in {
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "iivvaannxx" ];
 
   services.openssh = {

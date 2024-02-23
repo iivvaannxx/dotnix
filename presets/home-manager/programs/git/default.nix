@@ -20,6 +20,7 @@ in {
 
     userName = profile.fullName;
     userEmail = profile.github.noReplyEmail;
+    lfs.enable = true;
 
     extraConfig = {
 

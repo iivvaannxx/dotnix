@@ -2,6 +2,7 @@
 { lib, pkgs, ... } @ args: let
 
   inherit (lib) mkDefault;
+  esLocale = "es_ES.UTF-8";
 
 in {
 
@@ -30,18 +31,18 @@ in {
   };
 
   # Use English as language but Spanish units and currencies.
-  i18n.defaultLocale = mkDefault "en_US.UTF-8";
+  i18n.defaultLocale = mkDefault esLocale;
   i18n.extraLocaleSettings = {
 
-    LC_NAME = mkDefault "es_ES.UTF-8";
-    LC_TIME = mkDefault "es_ES.UTF-8";
-    LC_PAPER = mkDefault "es_ES.UTF-8";
-    LC_ADDRESS = mkDefault "es_ES.UTF-8";
-    LC_NUMERIC = mkDefault "es_ES.UTF-8";
-    LC_MONETARY = mkDefault "es_ES.UTF-8";
-    LC_TELEPHONE = mkDefault "es_ES.UTF-8";
-    LC_MEASUREMENT = mkDefault "es_ES.UTF-8";
-    LC_IDENTIFICATION = mkDefault "es_ES.UTF-8";
+    LC_NAME = mkDefault esLocale;
+    LC_TIME = mkDefault esLocale;
+    LC_PAPER = mkDefault esLocale;
+    LC_ADDRESS = mkDefault esLocale;
+    LC_NUMERIC = mkDefault esLocale;
+    LC_MONETARY = mkDefault esLocale;
+    LC_TELEPHONE = mkDefault esLocale;
+    LC_MEASUREMENT = mkDefault esLocale;
+    LC_IDENTIFICATION = mkDefault esLocale;
   };
 
   nix.settings = {

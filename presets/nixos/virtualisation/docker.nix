@@ -23,7 +23,7 @@ in {
 
     # Enable on boot. Forbid rootless mode.
     enableOnBoot = mkDefault true;
-    rootless.enable = mkDefault false;
+    rootless.enable = mkDefault true;
 
     autoPrune = {
 

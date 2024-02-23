@@ -16,7 +16,10 @@ in {
   programs.gh = {
 
     enable = true;
-    enableGitCredentialHelper = mkDefault true;
+    gitCredentialHelper = {
+
+      enable = mkDefault true;
+    };
 
     # See: https://cli.github.com/manual/gh_config
     settings = {
