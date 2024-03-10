@@ -28,12 +28,10 @@ in {
     # TODO: Move Ble.sh to a separate module.
     initExtra = ''
 
-      source "${pkgs.blesh}/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
+      [[ $- == *i* ]] && source "${pkgs.blesh}/share/blesh/ble.sh" --rcfile "$HOME/.blerc" 
       
       # We need to start starship after ble.sh has been sourced and before attaching. TODO: Do it in a better way.
-      eval "$(/etc/profiles/per-user/iivvaannxx/bin/starship init bash --print-full-init)"
-
-      [[ ''${BLE_VERSION-} ]] && ble-attach
+      # eval "$(/etc/profiles/per-user/iivvaannxx/bin/starship init bash --print-full-init)"
     '';
   };
 

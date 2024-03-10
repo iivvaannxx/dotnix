@@ -9,16 +9,53 @@
   # The packages defined at the flake outputs.
   selfPackages = attrValues customPkgs;
 
+  # Tweaks to make Rider work with Unity. See: https://huantian.dev/blog/unity3d-rider-nixos/
+  # TODO: Abstract into a module.
+  extra-path = with pkgs; [
+
+    dotnetCorePackages.sdk_6_0
+    dotnetPackages.Nuget
+    mono
+    msbuild
+
+    # Extra binaries for Rider.
+  ];
+
+  extra-libs = with pkgs; [
+
+    # Extra libraries for Rider.
+  ];
+
+  rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
+
+    postInstall = ''
+
+      # Wrap rider with extra tools and libraries
+      mv $out/bin/rider $out/bin/.rider-toolless
+      makeWrapper $out/bin/.rider-toolless $out/bin/rider \
+        --argv0 rider \
+        --prefix PATH : "${lib.makeBinPath extra-path}" \
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-libs}"
+
+      # Making Unity Rider plugin work!
+      # The plugin expects the binary to be at /rider/bin/rider,
+      # with bundled files at /rider/
+      # It does this by going up two directories from the binary path
+      # Our rider binary is at $out/bin/rider, so we need to link $out/rider/ to $out/
+      shopt -s extglob
+      ln -s $out/rider/!(bin) $out/
+      shopt -u extglob
+
+    '' + attrs.postInstall or "";
+  });
+
 in {
 
   imports = [
 
     (withConfig "base/home-manager")
-
-    (withPreset "backend/node")
-    (withPreset "packaging/pnpm")
-
     (withPreset "desktop/xdg")
+    (withPreset "backend/node")
 
     (withPreset "programs/gh")
     (withPreset "programs/git")
@@ -46,11 +83,16 @@ in {
     inkscape
     figma-linux
     figma-agent
+    unityhub
+    rider
+    jetbrains.idea-ultimate
+    anydesk
 
   ] ++ [
 
     upkgs.vscode
     upkgs.discord
+    upkgs.obsidian
 
   ] ++ selfPackages;
 

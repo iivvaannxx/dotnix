@@ -52,6 +52,11 @@ in {
     truncation_symbol = "…/";
   };
 
+  nix_shell = {
+
+    symbol = "❄️ ";
+  };
+
   custom.direnv = {
 
     format = "[\\[direnv\\]]($style) ";
