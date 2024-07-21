@@ -37,7 +37,7 @@ in {
 
     firewall = {
 
-      allowedTCPPorts = [ 3000 4321 5000 5500 8000 8080 ];
+      allowedTCPPorts = [ 3000 4173 4321 5000 5173 5500 8000 8080 ];
     };
 
   };

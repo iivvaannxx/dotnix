@@ -11,4 +11,8 @@ in {
 
   # Enable the firewall by default.
   networking.firewall.enable = mkDefault true;
+
+  networking.extraHosts = ''
+    140.82.114.3 github.com github.io
+  '';
 }

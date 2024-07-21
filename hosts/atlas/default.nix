@@ -84,15 +84,15 @@ in {
     gnome.gnome-tweaks
 
     cached-nix-shell
+    wineWowPackages.stable
   ];
 
   modules.tools.onepassword = {
 
-    cli.enable = true;
     gui = {
 
       enable = true;
-      package = upkgs._1password-gui;
+      package = pkgs._1password-gui;
       polkitPolicyOwners = [ "iivvaannxx" ];
     };
   };
@@ -106,11 +106,12 @@ in {
 
   services.openssh = {
 
-    enable = true;
+    # Disable until XZ backdoor is fixed.
+    enable = false;
 
     # This opens port 22 automatically.
-    openFirewall = true;
-    startWhenNeeded = true;
+    openFirewall = false;
+    startWhenNeeded = false;
 
     settings = {
 

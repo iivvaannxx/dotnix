@@ -76,23 +76,24 @@ in {
     obs-studio
     blesh
     vlc
-    firefox
     blender
-    google-chrome
     deno
     inkscape
-    figma-linux
-    figma-agent
     unityhub
     rider
     jetbrains.idea-ultimate
-    anydesk
+
+    tree
+    unzip
+    cachix
+    ffmpeg
+
 
   ] ++ [
 
     upkgs.vscode
     upkgs.discord
-    upkgs.obsidian
+    upkgs.devenv
 
   ] ++ selfPackages;
 
