@@ -19,9 +19,9 @@
     
   in flake-parts.lib.mkFlake { inherit inputs; } {
 
-    /* imports = [
+    imports = [
       inputs.devshell.flakeModule
-    ]; */
+    ];
 
     # The systems tested at the moment.
     systems = [ "x86_64-linux" ];
@@ -57,14 +57,13 @@
     unstablepkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # To manage devshells.
-    /* devshell = {
+    devshell = {
 
       url = "github:numtide/devshell";
 
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.flake-parts.follows = "flake-parts";
-    }; */
+    };
 
     # HM to manage home directories.
     home-manager = {
