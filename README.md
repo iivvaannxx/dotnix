@@ -25,10 +25,19 @@
 > This is a constant work in progress. I've been using NixOS for over a year now and am still a beginner. These dotfiles haven't been updated in a while, because the current configuration didn't need much more things to be added. But there's a lot more I want to customize and add to it, which I will be doing in the future.
 
 > [!CAUTION]
-> While you can use this as a reference, it's almost certain that you will need to make changes to fit your system. Check the [useful links](#useful-links) section for more information on how to configure NixOS.
-
+> While you can use this as a reference, it's almost certain that you will need to make changes to fit your system. Check the [useful links](#-useful-links) section for more information on how to configure NixOS.
 
 ## Table of Contents
+
+- [📖 Introduction](#-introduction)
+  - [What is NixOS?](#what-is-nixos)
+  - [Why I use NixOS?](#why-i-use-nixos)
+  - [These Dotfiles](#these-dotfiles)
+- [⚙️ Structure](#-structure)
+- [🖥️ Installation](#️-installation)
+- [💡 Inspiration](#-inspiration)
+- [🔗 Useful Links](#-useful-links)
+- [🚀 Future Work](#-future-work)
 
 ## 📖 Introduction
 
