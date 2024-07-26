@@ -33,7 +33,7 @@
   - [What is NixOS?](#what-is-nixos)
   - [Why I use NixOS?](#why-i-use-nixos)
   - [These Dotfiles](#these-dotfiles)
-- [⚙️ Structure](#-structure)
+- [⚙️ Structure](#️-structure)
 - [🖥️ Installation](#️-installation)
 - [💡 Inspiration](#-inspiration)
 - [🔗 Useful Links](#-useful-links)
