@@ -3,7 +3,6 @@ final: prev: {
   
   # All our custom functions are defined in the 'custom' attribute of the lib.
   custom = import ../lib { 
-    
     lib = final; 
   }; 
 }

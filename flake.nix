@@ -33,12 +33,12 @@
 
       # Import all the custom packages.
       packages = import ./packages (args // { inherit lib; });
-      /* devshells.default = {
+      devshells.default = args.devshell.mkShell {
 
-        shellHook = ''
+        devshell.startup.shellHook.text = ''
           source ./helpers.sh
         '';
-      }; */
+      };
     };
 
     flake = {
