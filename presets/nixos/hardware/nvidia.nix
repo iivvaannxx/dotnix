@@ -16,7 +16,7 @@ in {
 
   hardware.nvidia = {
 
-    nvidiaSettings = mkDefault false;
+    nvidiaSettings = mkDefault true;
     forceFullCompositionPipeline = mkDefault true;
   };
 
