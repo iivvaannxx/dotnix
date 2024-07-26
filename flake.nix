@@ -20,7 +20,7 @@
   in flake-parts.lib.mkFlake { inherit inputs; } {
 
     imports = [
-      inputs.devshell.flakeModule
+      inputs.make-shell.flakeModules.default
     ];
 
     # The systems tested at the moment.
@@ -33,9 +33,9 @@
 
       # Import all the custom packages.
       packages = import ./packages (args // { inherit lib; });
-      devshells.default = args.devshell.mkShell {
+      make-shells.default = {
 
-        devshell.startup.shellHook.text = ''
+        shellHook = ''
           source ./helpers.sh
         '';
       };
@@ -57,13 +57,7 @@
     unstablepkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # To manage devshells.
-    devshell = {
-
-      url = "github:numtide/devshell";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    make-shell.url = "github:nicknovitski/make-shell";
 
     # HM to manage home directories.
     home-manager = {

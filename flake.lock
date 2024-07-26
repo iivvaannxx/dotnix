@@ -1,28 +1,5 @@
 {
   "nodes": {
-    "devshell": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1721986491,
-        "narHash": "sha256-lVAlUOIPszv5HMYQGscskeGdRIYpTY6xrPfEok0hHgI=",
-        "owner": "numtide",
-        "repo": "devshell",
-        "rev": "cc8700135fb0740199ac248063f20c6b1a3c7e42",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "devshell",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -77,6 +54,21 @@
         "owner": "nix-community",
         "ref": "release-23.11",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "make-shell": {
+      "locked": {
+        "lastModified": 1721584638,
+        "narHash": "sha256-EzRCMxlL2q77Pem4kUqycjw2zan55ZHrgO+axne1uHc=",
+        "owner": "nicknovitski",
+        "repo": "make-shell",
+        "rev": "7c99aa69ca7fd940cffb9506b90fabf9ffbc2097",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nicknovitski",
+        "repo": "make-shell",
         "type": "github"
       }
     },
@@ -162,10 +154,10 @@
     },
     "root": {
       "inputs": {
-        "devshell": "devshell",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "make-shell": "make-shell",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix",
