@@ -13,5 +13,6 @@ in pkgs.mkShell {
   buildInputs = with pkgs; [ git ];
   shellHook = ''
     export PATH="${nixBin}/bin:$PATH"
+    source ./helpers.sh
   '';
 }

@@ -13,18 +13,19 @@
 
       # Add here the modules received in the flake inputs (except HM, which is handled automatically).
       extraNixosModules = [ 
-        
         inputs.sops-nix.nixosModules.sops
       ];
     });
     
   in flake-parts.lib.mkFlake { inherit inputs; } {
 
+    /* imports = [
+      inputs.devshell.flakeModule
+    ]; */
+
     # The systems tested at the moment.
     systems = [ "x86_64-linux" ];
-    perSystem = { config, self', inputs', pkgs, upkgs, system, ... } @ args: let 
-
-    in {
+    perSystem = { config, self', inputs', pkgs, upkgs, system, ... } @ args: {
 
       # Allow unfree packages.
       _module.args.pkgs = lib.custom.mkUnfreePkgs nixpkgs { inherit system; };
@@ -32,10 +33,15 @@
 
       # Import all the custom packages.
       packages = import ./packages (args // { inherit lib; });
+      /* devshells.default = {
+
+        shellHook = ''
+          source ./helpers.sh
+        '';
+      }; */
     };
 
     flake = {
-
       nixosConfigurations.atlas = createHost "x86_64-linux" ./hosts/atlas [ ./users/iivvaannxx ];
     };
   };
@@ -49,6 +55,16 @@
     # The package sets to use.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     unstablepkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # To manage devshells.
+    /* devshell = {
+
+      url = "github:numtide/devshell";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-parts.follows = "flake-parts";
+    }; */
 
     # HM to manage home directories.
     home-manager = {

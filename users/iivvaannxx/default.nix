@@ -87,6 +87,7 @@ in {
     unzip
     cachix
     ffmpeg
+    warp-terminal
 
 
   ] ++ [
